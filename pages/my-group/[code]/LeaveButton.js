@@ -18,8 +18,6 @@ function LeaveButton() {
   );
   const { showToast } = useToasts();
   const leaveGroup = useCallback(async (e) => {
-    e.preventDefault();
-    e.stopPropagation();
     showToast("Left Group!");
     await fetch(`/api/groups/leaveGroup/${code}`, { method: "DELETE" });
     mutateGroupList();

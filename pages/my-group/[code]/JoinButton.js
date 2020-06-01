@@ -17,9 +17,7 @@ function JoinButton() {
     `/api/groups/getUsersAndEvents/${code}`
   );
   const { showToast } = useToasts();
-  const joinGroup = useCallback(async (e) => {
-    e.preventDefault();
-    e.stopPropagation();
+  const joinGroup = useCallback(async () => {
     showToast("Joined Group!");
     await fetch(`/api/groups/joinGroup/${code}`, {
       method: "POST",

@@ -41,27 +41,21 @@ function CreateGroupForm() {
   return (
     <Form onSubmit={createGroup}>
       <Form.Group>
-        <Container>
-          <Row>
-            <Col>
-              <InputGroup>
-                <InputGroup.Prepend>
-                  <InputGroup.Text>Create New Group</InputGroup.Text>
-                </InputGroup.Prepend>
-                <FormControl
-                  placeholder="Enter New Group Name"
-                  required
-                  type="text"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                />
-              </InputGroup>
-            </Col>
-            <Col md="auto">
-              <Button type="submit">Create</Button>
-            </Col>
-          </Row>
-        </Container>
+        <InputGroup>
+          <InputGroup.Prepend>
+            <InputGroup.Text>Create New Group</InputGroup.Text>
+          </InputGroup.Prepend>
+          <FormControl
+            placeholder="Enter New Group Name"
+            required
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <Button type="submit" className="ml-1">
+            Create
+          </Button>
+        </InputGroup>
       </Form.Group>
     </Form>
   );

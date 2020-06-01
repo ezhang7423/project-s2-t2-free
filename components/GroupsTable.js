@@ -1,8 +1,21 @@
 import useSWR from "swr";
 import Table from "react-bootstrap/Table";
 import Link from "next/link";
+import { useToasts } from "./Toasts";
+import { useCallback, useState } from "react";
+import Button from "react-bootstrap/Button";
+import { Form } from "react-bootstrap";
 
 function createTable(data, membersJSON) {
+  const [isLeaveMode, setIsLeaveMode] = useState(false);
+  const { mutate } = useSWR("/api/groups/getUserGroups");
+  const { showToast } = useToasts();
+  const leaveGroup = useCallback(async (groupID, groupName) => {
+    showToast("Left Group: " + groupName);
+    await fetch(`/api/groups/leaveGroup/${groupID}`, { method: "DELETE" });
+    mutate();
+  });
+
   if (typeof data === "object" && typeof membersJSON === "object") {
     const items = [];
 
@@ -24,6 +37,16 @@ function createTable(data, membersJSON) {
               </a>
             </Link>{" "}
           </td>
+          <td>
+            {isLeaveMode && (
+              <Button
+                variant="danger"
+                onClick={() => leaveGroup(data[i].code, data[i].name)}
+              >
+                Leave
+              </Button>
+            )}
+          </td>
         </tr>
       );
     }
@@ -36,6 +59,14 @@ function createTable(data, membersJSON) {
             <th>Members</th>
             <th>Code</th>
             <th>Link</th>
+            <th>
+              <Form.Check
+                label="Leave"
+                type="switch"
+                id="isLeaveMode"
+                onChange={(e) => setIsLeaveMode(e.target.checked)}
+              />
+            </th>
           </tr>
         </thead>
         <tbody>{items}</tbody>

@@ -42,6 +42,18 @@ export default function createTable() {
     await mutate();
   }, []);
 
+  function resetSchedule() {
+    var reset = confirm("Are you sure you want to reset your schedule?");
+    if (reset == true) {
+      if (typeof data === "object") {
+        for (let i = 0; i < data.length; i++) {
+          deleteId(data[i]._id);
+        }
+      }
+      showToast("Cleared schedule!");
+    }
+  }
+
   if (typeof data === "object") {
     const items = [];
 
@@ -60,6 +72,26 @@ export default function createTable() {
                 </Button>
               </Form.Group>
             )}
+          </td>
+        </tr>
+      );
+    }
+
+    if (isDeleteMode) {
+      items.push(
+        <tr style={{ backgroundColor: "#ffbfc2" }}>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>
+            {
+              <Form.Group>
+                <Button variant="danger" onClick={() => resetSchedule()}>
+                  Reset All
+                </Button>
+              </Form.Group>
+            }
           </td>
         </tr>
       );

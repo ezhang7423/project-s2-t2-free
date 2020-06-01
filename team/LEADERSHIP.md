@@ -11,3 +11,4 @@
 | Thu 05/21 | Ishana Narayanan | Will lead 2nd Demo                                     |
 | Tue 05/26 | Clare Boyle      | Will lead 3rd Retro                                    |
 | Tue 05/26 | Ishana Narayanan | Will lead Sprint Planning                              |
+| Wed 06/10 | Clare/Vincent    | Will do final presentation video                       |
